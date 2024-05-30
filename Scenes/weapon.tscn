@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt04idtx1nb60"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon.gd" id="1_l6yle"]
+[ext_resource type="PackedScene" uid="uid://dnv5keo2hk72m" path="res://Scenes/bullet.tscn" id="2_v2764"]
+[ext_resource type="PackedScene" uid="uid://rpey3nq236le" path="res://Scenes/rifle.tscn" id="3_em6gx"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_l6yle")
+BulletScene = ExtResource("2_v2764")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Rifle" parent="." instance=ExtResource("3_em6gx")]
+position = Vector2(-1, -4)
+scale = Vector2(0.24, 0.24)

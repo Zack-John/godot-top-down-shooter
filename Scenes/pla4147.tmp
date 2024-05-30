@@ -1,0 +1,139 @@
+[gd_scene load_steps=21 format=3 uid="uid://kdjxmva2cvgx"]
+
+[ext_resource type="Texture2D" uid="uid://i8r65btdygth" path="res://Assets/Characters/Player/mPlayer_ [elf].png" id="1_iv2h2"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_nqivf"]
+[ext_resource type="PackedScene" uid="uid://hiuywoh27itt" path="res://Scenes/team.tscn" id="5_hoewl"]
+[ext_resource type="PackedScene" uid="uid://bcgmdv8noa31p" path="res://Scenes/Pistol.tscn" id="6_7er8d"]
+[ext_resource type="Script" path="res://Scripts/WeaponManager.gd" id="6_gygas"]
+[ext_resource type="PackedScene" uid="uid://do5le4moaogrt" path="res://Scenes/Health.tscn" id="6_per7m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pj8tn"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a645h"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gtog"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dja8o"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sub5b"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pnws"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg7uj"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ph4ci"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37whg"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5pc4"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egrq5"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(192, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xtq1"]
+atlas = ExtResource("1_iv2h2")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oogw2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pj8tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a645h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gtog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dja8o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sub5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pnws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg7uj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ph4ci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37whg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5pc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egrq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xtq1")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hhr4a"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+platform_floor_layers = 0
+script = ExtResource("1_nqivf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_oogw2")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_hhr4a")
+
+[node name="Health" parent="." instance=ExtResource("6_per7m")]
+health = 150
+
+[node name="Team" parent="." instance=ExtResource("5_hoewl")]
+team = 1
+
+[node name="CameraTransform" type="RemoteTransform2D" parent="."]
+
+[node name="WeaponManager" type="Node2D" parent="."]
+position = Vector2(0, -5)
+script = ExtResource("6_gygas")
+
+[node name="Pistol" parent="WeaponManager" instance=ExtResource("6_7er8d")]
+scale = Vector2(0.24, 0.24)

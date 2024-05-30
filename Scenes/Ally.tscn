@@ -1,0 +1,153 @@
+[gd_scene load_steps=22 format=3 uid="uid://db8uadu6wiket"]
+
+[ext_resource type="Script" path="res://Scripts/Actor.gd" id="1_iq4oe"]
+[ext_resource type="Texture2D" uid="uid://28hijaxey4we" path="res://Assets/Characters/Enemies/goblin_.png" id="2_gj01e"]
+[ext_resource type="PackedScene" uid="uid://bt04idtx1nb60" path="res://Scenes/weapon.tscn" id="3_4fh44"]
+[ext_resource type="PackedScene" uid="uid://do5le4moaogrt" path="res://Scenes/Health.tscn" id="4_ie0dn"]
+[ext_resource type="Script" path="res://Scripts/AI.gd" id="5_o4yf2"]
+[ext_resource type="PackedScene" uid="uid://hiuywoh27itt" path="res://Scenes/team.tscn" id="6_mff7s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ponhc"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6pvv"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nch4"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdib4"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ym1t6"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7trm"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogend"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rmk3"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3arb"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4j2i"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw02l"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30pvp"]
+atlas = ExtResource("2_gj01e")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oogw2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ponhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6pvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5nch4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdib4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ym1t6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7trm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogend")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rmk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3arb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4j2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gw02l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30pvp")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hhr4a"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vdk08"]
+radius = 87.0057
+
+[node name="Ally" type="CharacterBody2D"]
+motion_mode = 1
+platform_floor_layers = 0
+script = ExtResource("1_iq4oe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_oogw2")
+animation = &"run"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.415886
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_hhr4a")
+
+[node name="Weapon" parent="." instance=ExtResource("3_4fh44")]
+
+[node name="AI" type="Node2D" parent="."]
+script = ExtResource("5_o4yf2")
+
+[node name="DetectionArea" type="Area2D" parent="AI" groups=["enemy"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/DetectionArea"]
+shape = SubResource("CircleShape2D_vdk08")
+
+[node name="PatrolTimer" type="Timer" parent="AI"]
+wait_time = 3.0
+one_shot = true
+
+[node name="Health" parent="." instance=ExtResource("4_ie0dn")]
+
+[node name="Team" parent="." instance=ExtResource("6_mff7s")]
+team = 1
+
+[connection signal="body_entered" from="AI/DetectionArea" to="AI" method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="AI/DetectionArea" to="AI" method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="AI/PatrolTimer" to="AI" method="_on_patrol_timer_timeout"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnv5keo2hk72m"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_hvfhe"]
+[ext_resource type="Texture2D" uid="uid://blhsll7hosusn" path="res://Assets/Objects/bulletSilverSilver_outline.png" id="1_p11yy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0wg17"]
+height = 36.0
+
+[node name="bullet" type="Area2D"]
+rotation = 1.5708
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_hvfhe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_p11yy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_0wg17")
+
+[node name="KillTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timer_timeout"]

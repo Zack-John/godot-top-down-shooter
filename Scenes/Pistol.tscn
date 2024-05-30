@@ -1,0 +1,197 @@
+[gd_scene load_steps=20 format=3 uid="uid://bcgmdv8noa31p"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon.gd" id="1_ohwm1"]
+[ext_resource type="Texture2D" uid="uid://cxatdlxifijuf" path="res://Assets/Objects/tank_arrowFull.png" id="2_cqsvt"]
+[ext_resource type="Texture2D" uid="uid://h1a32nb3xejk" path="res://Assets/Weapons/Pistol - Second version sprite sheets (80x48)/Pistol_V1.00 - SHOOTING (ALL FX).png" id="2_rrb7n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1umy"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(0, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5i6y1"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(80, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l82ti"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(160, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwixl"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(240, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udriw"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(320, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8h2v"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(400, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c87f5"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(480, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u0ym"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(560, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdcd8"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(640, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wqm0"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(720, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncpyy"]
+atlas = ExtResource("2_rrb7n")
+region = Rect2(800, 0, 80, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8w4or"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1umy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5i6y1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l82ti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwixl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udriw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8h2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c87f5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u0ym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdcd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wqm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncpyy")
+}],
+"loop": false,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="Animation" id="Animation_0y10n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_u67qg"]
+resource_name = "muzzle_flash"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MuzzleFlash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.15, 0.15), Vector2(0.2, 0.06)]
+}
+
+[sub_resource type="Animation" id="Animation_bohev"]
+resource_name = "reload"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -1.5708, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xxdq5"]
+_data = {
+"RESET": SubResource("Animation_0y10n"),
+"muzzle_flash": SubResource("Animation_u67qg"),
+"reload": SubResource("Animation_bohev")
+}
+
+[node name="Pistol" type="Node2D"]
+script = ExtResource("1_ohwm1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8w4or")
+offset = Vector2(20, 5)
+
+[node name="MuzzleFlash" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(70, -6)
+rotation = 3.14159
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_cqsvt")
+
+[node name="FirePoint" type="Marker2D" parent="."]
+position = Vector2(29, -6)
+
+[node name="GunDirection" type="Marker2D" parent="."]
+position = Vector2(40, -6)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xxdq5")
+}
+
+[node name="AttackCooldown" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

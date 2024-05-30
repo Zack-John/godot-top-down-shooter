@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqvvgqht3keei"]
+
+[ext_resource type="Texture2D" uid="uid://cgulw104lc3xj" path="res://Assets/Environment/Surplus Trees.png" id="1_7o7ny"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4rhqq"]
+radius = 3.0
+height = 8.0
+
+[node name="Tree1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.746667, 0.746667)
+texture = ExtResource("1_7o7ny")
+offset = Vector2(0, -71)
+region_enabled = true
+region_rect = Rect2(2.09444, -0.407124, 75.9135, 146.738)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -4)
+shape = SubResource("CapsuleShape2D_4rhqq")
